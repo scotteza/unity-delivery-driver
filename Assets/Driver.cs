@@ -10,7 +10,7 @@ using UnityEngine;
 public class Driver : MonoBehaviour
 {
     [SerializeField]
-    float _steeringSpeed = 1f;
+    float _steeringSpeed = 0.8f;
 
     [SerializeField]
     float _movementSpeed = 0.02f;
@@ -21,7 +21,19 @@ public class Driver : MonoBehaviour
 
     private void Update()
     {
-        transform.Rotate(0, 0, _steeringSpeed);
-        transform.Translate(0, _movementSpeed, 0);
+        Steer();
+        Move();
+    }
+
+    private void Steer()
+    {
+        var steerAmount = Input.GetAxis("Horizontal") * _steeringSpeed;
+        transform.Rotate(0, 0, -steerAmount);
+    }
+
+    private void Move()
+    {
+        var moveAmount = Input.GetAxis("Vertical") * _movementSpeed;
+        transform.Translate(0, moveAmount, 0);
     }
 }
