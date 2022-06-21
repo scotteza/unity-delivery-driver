@@ -9,11 +9,9 @@ using UnityEngine;
 
 public class Driver : MonoBehaviour
 {
-    [SerializeField]
-    float _steeringSpeed = 300;
+    [SerializeField] float _steeringSpeed = 300;
 
-    [SerializeField]
-    float _movementSpeed = 20;
+    [SerializeField] float _movementSpeed = 20;
 
     private void Start()
     {
