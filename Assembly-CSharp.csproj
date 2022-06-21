@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Driver.cs" />
     <Compile Include="Assets\Collision.cs" />
+    <Compile Include="Assets\Trigger.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
