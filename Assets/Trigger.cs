@@ -6,31 +6,43 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
-    bool hasPackage = false;
+    private const string PackageTag = "Package";
+    private const string CustomerTag = "Customer";
+
+    private int _carriedPackageCount = 0;
+    [SerializeField] private float _destroyDelay = 0.5f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Package")
+        if (collision.tag == PackageTag)
         {
-            hasPackage = true;
-            Debug.Log("Picked up package");
+            var package = collision.gameObject;
+            PickUpPackage(package);
         }
-        else if (collision.tag == "Customer")
+
+        if (collision.tag == CustomerTag)
         {
             AttemptToDeliverPackage();
         }
     }
 
+    private void PickUpPackage(GameObject package)
+    {
+        _carriedPackageCount++;
+        Destroy(package, _destroyDelay);
+        Debug.Log("Picked up a package");
+    }
+
     private void AttemptToDeliverPackage()
     {
-        if (hasPackage)
+        if (_carriedPackageCount == 0)
         {
-            Debug.Log("Delivered package");
-            hasPackage = false;
+            Debug.Log("You are not carrying any packages");
         }
         else
         {
-            Debug.Log("You can't deliver a package you haven't picked up");
+            Debug.Log($"Delivered {_carriedPackageCount} package(s) to the customer, good job!");
+            _carriedPackageCount = 0;
         }
     }
 }
