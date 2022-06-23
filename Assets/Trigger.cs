@@ -6,23 +6,31 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
+    bool hasPackage = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Package")
         {
-            Debug.Log("Collided with package");
+            hasPackage = true;
+            Debug.Log("Picked up package");
         }
         else if (collision.tag == "Customer")
         {
-            Debug.Log("Collided with customer");
-        }
-        else
-        {
-            Debug.Log($"Collided with {collision.tag}");
+            AttemptToDeliverPackage();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void AttemptToDeliverPackage()
     {
+        if (hasPackage)
+        {
+            Debug.Log("Delivered package");
+            hasPackage = false;
+        }
+        else
+        {
+            Debug.Log("You can't deliver a package you haven't picked up");
+        }
     }
 }
