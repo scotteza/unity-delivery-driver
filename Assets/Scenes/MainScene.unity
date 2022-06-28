@@ -2656,10 +2656,10 @@ GameObject:
   - component: {fileID: 1050802668}
   - component: {fileID: 1050802667}
   - component: {fileID: 1050802666}
+  - component: {fileID: 1050802673}
   - component: {fileID: 1050802670}
   - component: {fileID: 1050802671}
   - component: {fileID: 1050802672}
-  - component: {fileID: 1050802673}
   - component: {fileID: 1050802674}
   m_Layer: 0
   m_Name: Beast
@@ -2684,6 +2684,7 @@ MonoBehaviour:
   _movementSpeed: 20
   _slowSpeed: 10
   _fastSpeed: 30
+  _speedUpAudioClip: {fileID: 8300000, guid: 229494b28b773884e9bc048bed878426, type: 3}
 --- !u!212 &1050802667
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3197,8 +3198,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1310462390}
+  - component: {fileID: 1310462391}
   m_Layer: 0
-  m_Name: Sounds
+  m_Name: Audio Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3219,6 +3221,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1310462391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310462389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d8fdb89a3e7264991aa39317b595fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1344777399
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,8 @@ public class Driver : MonoBehaviour
 
     private AudioSource _audioSource;
 
+    [SerializeField] private AudioClip _speedUpAudioClip;
+
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -74,6 +76,7 @@ public class Driver : MonoBehaviour
         if (collision.tag == BoostTag)
         {
             _movementSpeed = _fastSpeed;
+            _audioSource.PlayOneShot(_speedUpAudioClip);
         }
     }
 
