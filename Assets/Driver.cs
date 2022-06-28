@@ -22,12 +22,12 @@ public class Driver : MonoBehaviour
     private AudioSource _audioSource;
 
     [SerializeField] private AudioClip _speedUpAudioClip;
+    [SerializeField] private AudioClip _collisionAudioClip;
 
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         _audioSource.Stop();
-        _audioSource.mute = false;
     }
 
     private void Update()
@@ -51,7 +51,6 @@ public class Driver : MonoBehaviour
 
     private void Move(float moveAmount)
     {
-        ManageCarEngineAudio(moveAmount);
         transform.Translate(0, moveAmount, 0);
     }
 
@@ -59,12 +58,10 @@ public class Driver : MonoBehaviour
     {
         if (moveAmount == 0)
         {
-            _audioSource.mute = true;
             _audioSource.Stop();
             return;
         }
 
-        _audioSource.mute = false;
         if (!_audioSource.isPlaying)
         {
             _audioSource.Play();
@@ -83,5 +80,6 @@ public class Driver : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _movementSpeed = _slowSpeed;
+        _audioSource.PlayOneShot(_collisionAudioClip);
     }
 }

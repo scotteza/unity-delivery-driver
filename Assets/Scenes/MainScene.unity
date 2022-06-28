@@ -2685,6 +2685,7 @@ MonoBehaviour:
   _slowSpeed: 10
   _fastSpeed: 30
   _speedUpAudioClip: {fileID: 8300000, guid: 229494b28b773884e9bc048bed878426, type: 3}
+  _collisionAudioClip: {fileID: 8300000, guid: 16e0183cff74a504ebff1f581329b585, type: 3}
 --- !u!212 &1050802667
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2830,6 +2831,9 @@ MonoBehaviour:
   _noPackageColor:
     serializedVersion: 2
     rgba: 4294967295
+  _pickUpAudioClip: {fileID: 8300000, guid: 6ae65700d67eeaa44a385817cc299cd8, type: 3}
+  _dropOffAudioClip: {fileID: 8300000, guid: e54bc21986e193c429999ad9bafc4dc0, type: 3}
+  _dropOffFailedAudioClip: {fileID: 8300000, guid: f6596e842bf095b4887ad9255837f19b, type: 3}
 --- !u!82 &1050802674
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2842,10 +2846,10 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 72ca544b786c36141abd2dcdb0f0e831, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.257
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128

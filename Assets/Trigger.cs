@@ -12,15 +12,22 @@ public class Trigger : MonoBehaviour
     private const string CustomerTag = "Customer";
 
     private int _carriedPackageCount = 0;
+
     [SerializeField] private float _destroyDelay = 0.5f;
     [SerializeField] private Color32 _hasPackageColor = new Color32(0, 255, 0, 255);
     [SerializeField] private Color32 _noPackageColor = new Color32(255, 255, 255, 255);
 
+    [SerializeField] private AudioClip _pickUpAudioClip;
+    [SerializeField] private AudioClip _dropOffAudioClip;
+    [SerializeField] private AudioClip _dropOffFailedAudioClip;
+
     private SpriteRenderer _spriteRenderer;
+    private AudioSource _audioSource;
 
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,6 +48,7 @@ public class Trigger : MonoBehaviour
     {
         _carriedPackageCount++;
         _spriteRenderer.color = _hasPackageColor;
+        _audioSource.PlayOneShot(_pickUpAudioClip);
         Destroy(package, _destroyDelay);
         Debug.Log("Picked up a package");
     }
@@ -49,13 +57,15 @@ public class Trigger : MonoBehaviour
     {
         if (_carriedPackageCount == 0)
         {
+            _audioSource.PlayOneShot(_dropOffFailedAudioClip);
             Debug.Log("You are not carrying any packages");
         }
         else
         {
-            Debug.Log($"Delivered {_carriedPackageCount} package(s) to the customer, good job!");
             _carriedPackageCount = 0;
             _spriteRenderer.color = _noPackageColor;
+            _audioSource.PlayOneShot(_dropOffAudioClip);
+            Debug.Log($"Delivered {_carriedPackageCount} package(s) to the customer, good job!");
         }
     }
 }
