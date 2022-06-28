@@ -1,6 +1,7 @@
 using UnityEngine;
 
 // ReSharper disable CheckNamespace
+// ReSharper disable ConvertToConstant.Local
 // ReSharper disable FieldCanBeMadeReadOnly.Local
 // ReSharper disable UnusedMember.Global
 // ReSharper disable UnusedMember.Local
