@@ -14,19 +14,26 @@ public class Driver : MonoBehaviour
     private const string HorizontalAxisName = "Horizontal";
     private const string VerticalAxisName = "Vertical";
 
-    [SerializeField] float _steeringSpeed = 300;
-    [SerializeField] float _movementSpeed = 20;
-    [SerializeField] float _slowSpeed = 10;
-    [SerializeField] float _fastSpeed = 40;
+    [SerializeField] private float _steeringSpeed = 300;
+    [SerializeField] private float _movementSpeed = 20;
+    [SerializeField] private float _slowSpeed = 10;
+    [SerializeField] private float _fastSpeed = 40;
+
+    private AudioSource _audioSource;
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.Stop();
+        _audioSource.mute = false;
     }
 
     private void Update()
     {
         Steer();
-        Move();
+        var moveAmount = GetMoveAmount();
+        Move(moveAmount);
+        ManageCarEngineAudio(moveAmount);
     }
 
     private void Steer()
@@ -35,10 +42,31 @@ public class Driver : MonoBehaviour
         transform.Rotate(0, 0, -steerAmount);
     }
 
-    private void Move()
+    private float GetMoveAmount()
     {
-        var moveAmount = Input.GetAxis(VerticalAxisName) * _movementSpeed * Time.deltaTime;
+        return Input.GetAxis(VerticalAxisName) * _movementSpeed * Time.deltaTime;
+    }
+
+    private void Move(float moveAmount)
+    {
+        ManageCarEngineAudio(moveAmount);
         transform.Translate(0, moveAmount, 0);
+    }
+
+    private void ManageCarEngineAudio(float moveAmount)
+    {
+        if (moveAmount == 0)
+        {
+            _audioSource.mute = true;
+            _audioSource.Stop();
+            return;
+        }
+
+        _audioSource.mute = false;
+        if (!_audioSource.isPlaying)
+        {
+            _audioSource.Play();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
